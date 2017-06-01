@@ -6,7 +6,7 @@ script:
 - docker run --name kin -e EXPRESS_SECRET=abcdefgh1234567 -e GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID -e GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET -e FACEBOOK_CLIENT_SECRET=$FACEBOOK_CLIENT_SECRET -e FACEBOOK_CLIENT_ID=$FACEBOOK_CLIENT_ID -d kin-server
 - echo "Container has been started... waiting a few seconds for initialization!"
 - travis_wait sleep 15
-- docker exec kin bash -c "curl -f -k https://localhost:8080"
+- docker exec kin bash -c "curl -sf -k -w "%{http_code}" https://localhost:8080 | grep 404"
 - docker logs kin
 env:
   secure: ksQCq/tWFGRSQbX0TdCnGrn9TwKEeEDdWhBk3i+hfULgVUFY2P737f6G/T0rmtO9TIjUw3YinendnPhtsRxlEjWDzQGonzR9Byt4YO0dfkuGV/FlRFVJeVHIcvb/OgdhS7Z4J+F6N9k9HFUk33hJLykw2qoiJoeQ9b1HDTQSk2VuFO3yQ4vJIyhPu2K6niy0oK1MJEcbbY/vwqDeOv3rl6nC3CrXjVfppNMID+Q323p4wZoz0NfYE24I2Dc46UCDGQoKf/yuo0mPbT5lvrGjcgo/asNy/qutEvp0igcNrR5jkfVPO2eF329jBSO7ZYLXMxvrrFD3DJpjEN70yH/ApI34w9W21ha+MPhd48YMSfjxdCzZZESIUPxlqOEnRd1Jih7Tn9ckcIG0bW1Mzl4Q3Pqv8lrPjrk5PalLql+0P3Bt+jfg6zP1y9OpgBrY8gvJRZw7lVlqtG1IZxB4C7daSQX++2ffN8ccD6R+A3b9poVhP5Ee4QbtQoCmrKNqKZOc2ooqh1SSTarLwRXXq12zInIhCwOYLsx+WsZoXCyZo0/UMPFR2nGs2CiQcTmSiNJvw4ply5NqFifXTunXdEK71GBH2FL2Ga15DwH60Xc5YP12EirZ1cQ4S6tWGzAGH4Ulp0Vc1MnU4okABlldifLpF8z74iUd2cwgNbIakAmcSOk=

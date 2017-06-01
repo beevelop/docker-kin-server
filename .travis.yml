@@ -7,5 +7,6 @@ script:
   - docker build -t kin-server .
   - docker run --name kin -d kin-server
   - echo "Container has been started... waiting a few seconds for initialization!"
-  - sleep 10
-  - docker exec kin bash -c "apt-get update && apt-get install curl -y --no-install-recommends && curl -f localhost:8080"
+  - travis_wait sleep 15
+  - docker exec kin bash -c "apt-get update && apt-get install curl -y --no-install-recommends && curl -f https://localhost:8080"
+  - docker logs kin
